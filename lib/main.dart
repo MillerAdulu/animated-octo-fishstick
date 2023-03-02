@@ -50,6 +50,19 @@ class _MyCoolLandingPageState extends State<MyCoolLandingPage> {
           itemCount: messages.length,
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          messages.add(
+            Message(
+              'New Person',
+              'Hello new person, we do cool things here',
+            ),
+          );
+
+          setState(() {});
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
