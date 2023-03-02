@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_app/message.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +19,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyCoolLandingPage extends StatelessWidget {
+class MyCoolLandingPage extends StatefulWidget {
   const MyCoolLandingPage({super.key});
+
+  @override
+  State<MyCoolLandingPage> createState() => _MyCoolLandingPageState();
+}
+
+class _MyCoolLandingPageState extends State<MyCoolLandingPage> {
+  final messages = [
+    Message('Miller Adulu', 'Please come with sugar and milk.'),
+    Message('Florence Atieno', 'Please prepare a poster.'),
+    Message('Kip', 'Please do some cool stuff.'),
+    Message('Douglas', 'Please do some other cool stuff.'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -28,72 +41,14 @@ class MyCoolLandingPage extends StatelessWidget {
         title: const Text('My Cool Landing Page'),
       ),
       body: Center(
-        child: ListView(children: const [
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Miller Adulu'),
-            subtitle: Text(
-              'Please come with sugar and milk',
-            ),
-            trailing: Text('18:53'),
+        child: ListView.builder(
+          itemBuilder: (context, index) => ListTile(
+            leading: const Icon(Icons.account_circle),
+            title: Text(messages[index].name),
+            subtitle: Text(messages[index].message),
           ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Miller Adulu'),
-            subtitle: Text(
-              'Please come with sugar and milk',
-            ),
-            trailing: Text('18:53'),
-          ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Miller Adulu'),
-            subtitle: Text(
-              'Please come with sugar and milk',
-            ),
-            trailing: Text('18:53'),
-          ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Miller Adulu'),
-            subtitle: Text(
-              'Please come with sugar and milk',
-            ),
-            trailing: Text('18:53'),
-          ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Miller Adulu'),
-            subtitle: Text(
-              'Please come with sugar and milk',
-            ),
-            trailing: Text('18:53'),
-          ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Miller Adulu'),
-            subtitle: Text(
-              'Please come with sugar and milk',
-            ),
-            trailing: Text('18:53'),
-          ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Miller Adulu'),
-            subtitle: Text(
-              'Please come with sugar and milk',
-            ),
-            trailing: Text('18:53'),
-          ),
-          ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Miller Adulu'),
-            subtitle: Text(
-              'Please come with sugar and milk',
-            ),
-            trailing: Text('18:53'),
-          ),
-        ]),
+          itemCount: messages.length,
+        ),
       ),
     );
   }
