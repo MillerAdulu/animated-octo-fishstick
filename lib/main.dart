@@ -28,15 +28,8 @@ class MyCoolLandingPage extends StatelessWidget {
         title: const Text('My Cool Landing Page'),
       ),
       body: Center(
-        child: ListView(children: [
-          Card(
-            child: Column(children: const [
-              FlutterLogo(),
-              Text('Posted By Miller'),
-              Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-            ]),
-          ),
-          const ListTile(
+        child: ListView(children: const [
+          ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Miller Adulu'),
             subtitle: Text(
@@ -44,7 +37,7 @@ class MyCoolLandingPage extends StatelessWidget {
             ),
             trailing: Text('18:53'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Miller Adulu'),
             subtitle: Text(
@@ -52,7 +45,7 @@ class MyCoolLandingPage extends StatelessWidget {
             ),
             trailing: Text('18:53'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Miller Adulu'),
             subtitle: Text(
@@ -60,7 +53,7 @@ class MyCoolLandingPage extends StatelessWidget {
             ),
             trailing: Text('18:53'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Miller Adulu'),
             subtitle: Text(
@@ -68,7 +61,7 @@ class MyCoolLandingPage extends StatelessWidget {
             ),
             trailing: Text('18:53'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Miller Adulu'),
             subtitle: Text(
@@ -76,7 +69,7 @@ class MyCoolLandingPage extends StatelessWidget {
             ),
             trailing: Text('18:53'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Miller Adulu'),
             subtitle: Text(
@@ -84,7 +77,7 @@ class MyCoolLandingPage extends StatelessWidget {
             ),
             trailing: Text('18:53'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Miller Adulu'),
             subtitle: Text(
@@ -92,7 +85,7 @@ class MyCoolLandingPage extends StatelessWidget {
             ),
             trailing: Text('18:53'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.account_circle),
             title: Text('Miller Adulu'),
             subtitle: Text(
