@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_app/message.dart';
 
 void main() {
@@ -34,6 +35,8 @@ class _MyCoolLandingPageState extends State<MyCoolLandingPage> {
     Message('Douglas', 'Please do some other cool stuff.'),
   ];
 
+  final messageController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,23 +44,36 @@ class _MyCoolLandingPageState extends State<MyCoolLandingPage> {
         title: const Text('My Cool Landing Page'),
       ),
       body: Center(
-        child: ListView.builder(
-          itemBuilder: (context, index) => ListTile(
-            leading: const Icon(Icons.account_circle),
-            title: Text(messages[index].name),
-            subtitle: Text(messages[index].message),
-          ),
-          itemCount: messages.length,
+        child: Column(
+          children: [
+            ListView.builder(
+              shrinkWrap: true,
+              itemBuilder: (context, index) => ListTile(
+                leading: const Icon(Icons.account_circle),
+                title: Text(messages[index].name),
+                subtitle: Text(messages[index].message),
+              ),
+              itemCount: messages.length,
+            ),
+           const Spacer(),
+            TextField(
+              controller: messageController,
+              decoration: const InputDecoration(
+                hintText: 'Enter your message',
+              ),
+            )
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           messages.add(
             Message(
-              'New Person',
-              'Hello new person, we do cool things here',
+              'New Message from Box',
+              messageController.text,
             ),
           );
+          messageController.clear();
 
           setState(() {});
         },
