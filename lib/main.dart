@@ -48,7 +48,6 @@ class _MyCoolLandingPageState extends State<MyCoolLandingPage> {
   getUsers() async {
     isLoading = true;
     await dio.get('https://jsonplaceholder.ir/users').then((response) {
-
       for (var onlineUser in response.data) {
         users.add(User.fromJson(onlineUser));
       }
@@ -69,25 +68,23 @@ class _MyCoolLandingPageState extends State<MyCoolLandingPage> {
       body: Center(
         child: isLoading
             ? const CircularProgressIndicator()
-            : Column(
-                children: [
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => ListTile(
-                      leading: SvgPicture.network(users[index].avatar),
-                      title: Text(users[index].username),
-                      subtitle: Text(users[index].email),
-                    ),
-                    itemCount: users.length,
+            : SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => ListTile(
+                          leading: SvgPicture.network(users[index].avatar),
+                          title: Text(users[index].username),
+                          subtitle: Text(users[index].email),
+                        ),
+                        itemCount: users.length,
+                      ),
+                    ],
                   ),
-                  const Spacer(),
-                  TextField(
-                    controller: messageController,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter your message',
-                    ),
-                  )
-                ],
+                ),
               ),
       ),
       // floatingActionButton: FloatingActionButton(
