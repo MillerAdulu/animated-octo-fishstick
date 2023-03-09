@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:form_app/message.dart';
+import 'package:form_app/user.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,12 +30,33 @@ class MyCoolLandingPage extends StatefulWidget {
 }
 
 class _MyCoolLandingPageState extends State<MyCoolLandingPage> {
-  final messages = [
-    Message('Miller Adulu', 'Please come with sugar and milk.'),
-    Message('Florence Atieno', 'Please prepare a poster.'),
-    Message('Kip', 'Please do some cool stuff.'),
-    Message('Douglas', 'Please do some other cool stuff.'),
-  ];
+  // Init State always runs once when the widget is build
+
+  final dio = Dio();
+
+  bool isLoading = false;
+
+  var users = <User>[];
+
+  @override
+  void initState() {
+    super.initState();
+
+    getUsers();
+  }
+
+  getUsers() async {
+    isLoading = true;
+    await dio.get('https://jsonplaceholder.ir/users').then((response) {
+
+      for (var onlineUser in response.data) {
+        users.add(User.fromJson(onlineUser));
+      }
+
+      isLoading = false;
+      setState(() {});
+    });
+  }
 
   final messageController = TextEditingController();
 
@@ -43,41 +67,43 @@ class _MyCoolLandingPageState extends State<MyCoolLandingPage> {
         title: const Text('My Cool Landing Page'),
       ),
       body: Center(
-        child: Column(
-          children: [
-            ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (context, index) => ListTile(
-                leading: const Icon(Icons.account_circle),
-                title: Text(messages[index].name),
-                subtitle: Text(messages[index].message),
+        child: isLoading
+            ? const CircularProgressIndicator()
+            : Column(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => ListTile(
+                      leading: SvgPicture.network(users[index].avatar),
+                      title: Text(users[index].username),
+                      subtitle: Text(users[index].email),
+                    ),
+                    itemCount: users.length,
+                  ),
+                  const Spacer(),
+                  TextField(
+                    controller: messageController,
+                    decoration: const InputDecoration(
+                      hintText: 'Enter your message',
+                    ),
+                  )
+                ],
               ),
-              itemCount: messages.length,
-            ),
-           const Spacer(),
-            TextField(
-              controller: messageController,
-              decoration: const InputDecoration(
-                hintText: 'Enter your message',
-              ),
-            )
-          ],
-        ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          messages.add(
-            Message(
-              'New Message from Box',
-              messageController.text,
-            ),
-          );
-          messageController.clear();
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     messages.add(
+      //       Message(
+      //         'New Message from Box',
+      //         messageController.text,
+      //       ),
+      //     );
+      //     messageController.clear();
 
-          setState(() {});
-        },
-        child: const Icon(Icons.add),
-      ),
+      //     setState(() {});
+      //   },
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }
